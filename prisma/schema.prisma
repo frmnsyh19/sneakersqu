@@ -1,0 +1,162 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+datasource db {
+  provider = "postgresql"
+
+}
+ 
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// model Room {
+//   id        String   @id @default(cuid())
+//   name      String
+//   description String? @db.Text
+//   image     String?
+//   price     Int
+//   capacity Int @default(1)
+  
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   roomAmenities RoomAmenities[]   // 👈 tambahan
+  
+//   reservations Reservation[]
+// }
+
+// model Amenities {
+//   id        String   @id @default(cuid())
+//   name      String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   roomAmenities RoomAmenities[]   // 👈 tambahan
+// }
+
+// model RoomAmenities {
+//   id          String   @id @default(cuid())
+//   roomId      String
+//   amenitiesId String
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   room      Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
+//   amenities Amenities @relation(fields: [amenitiesId], references: [id], onDelete: Cascade)
+
+  
+
+//   @@unique([roomId, amenitiesId])
+// }
+
+// model Reservation {
+//   id        String   @id @default(cuid())
+//   roomId    String
+//   userId    String
+//   startDate DateTime
+//   endDate   DateTime
+//   price    Int
+
+//   status    String   @default("pending")
+  
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   payment Payment?
+// }
+
+model Payment {
+  id            String   @id @default(cuid())
+  reservationId String @unique
+  amount        Int
+  status        String   @default("pending")
+  paymentMethod String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // reservation Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id          String @id @default(cuid())
+  gender      String
+  kategori    String
+  price       Int
+  brand       String
+  image       String
+  description String
+  name        String
+  
+  sizes        ProductSize[]
+  images       ProductImage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model ProductSize {
+  id        String   @id @default(cuid())
+  productId String
+  size      String   // "38", "39", "40", dst — string biar fleksibel (EU/US/UK)
+  stock     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, size])   // 1 produk nggak boleh punya ukuran yang sama dobel
+}
+
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  roles         String[]        @default(["USER"])
+  phone         String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+ 
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+
