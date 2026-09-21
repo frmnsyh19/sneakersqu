@@ -4,7 +4,7 @@ import React from "react";
 
 export const useGetDetailProduct = (id: string) => {
   return useQuery({
-    queryKey: ["DetailProduct"],
+    queryKey: ["DetailProduct", id],
     queryFn: async () => {
       try {
         const res = await axios.get(`/api/product/detail/${id}`);

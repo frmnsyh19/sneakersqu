@@ -77,7 +77,9 @@ export const SearchNavbar = () => {
       {/* Search box */}
       <label
         className={`input flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out ${
-          isSearch ? "w-64 opacity-100 px-3" : "w-0 opacity-0 px-0 border-none"
+          isSearch
+            ? "lg:w-64 w-40 opacity-100 px-3"
+            : "w-0 opacity-0 px-0 border-none"
         }`}>
         <svg
           className="h-[1em] opacity-50 shrink-0"

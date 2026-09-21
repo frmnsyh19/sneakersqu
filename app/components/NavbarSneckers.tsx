@@ -83,7 +83,7 @@ export const NavbarSneckers = () => {
                 </li>
               </ul>
             </div>
-            <div className="border border-red-500 flex justify-end  flex-row gap-1">
+            <div className=" flex justify-end  flex-row gap-1">
               <div className="flex flex-row gap-1">
                 <SearchNavbar />
                 <Cart />
