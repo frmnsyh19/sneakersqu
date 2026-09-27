@@ -57,14 +57,6 @@ export const NavbarSneckers = () => {
                   <a className=" text-lg">Home</a>
                 </li>
                 <li>
-                  <Link href={"/discover"} className=" text-lg">
-                    Discover
-                  </Link>
-                </li>
-                <li>
-                  <a className="text-lg">About</a>
-                </li>
-                <li>
                   <a className="text-lg" onClick={() => setCategory("running")}>
                     Running
                   </a>
@@ -76,11 +68,7 @@ export const NavbarSneckers = () => {
                     Sneckers
                   </a>
                 </li>
-                <li>
-                  <a className="text-lg" onClick={() => setCategory("formal")}>
-                    Formal
-                  </a>
-                </li>
+                {/* pesanan saya jika sudah login */}
               </ul>
             </div>
             <div className=" flex justify-end  flex-row gap-1">
@@ -101,10 +89,17 @@ export const NavbarSneckers = () => {
           <ul className="menu bg-base-200 min-h-full w-80 p-4">
             {/* Sidebar content here */}
             <li>
-              <a>Sidebar Item 1</a>
+              <a className=" text-lg">Home</a>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <a className="text-lg" onClick={() => setCategory("running")}>
+                Running
+              </a>
+            </li>
+            <li>
+              <a className="text-lg" onClick={() => setCategory("sneckers")}>
+                Sneckers
+              </a>
             </li>
           </ul>
         </div>
