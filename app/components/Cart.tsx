@@ -127,6 +127,9 @@ export const Cart = () => {
             </p>
           )}
         </div>
+        <div className="w-full p-2">
+          <button className="btn btn-primary w-full">Checkout</button>
+        </div>
       </div>
     </div>
   );

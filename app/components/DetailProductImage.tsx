@@ -1,57 +1,72 @@
 import React, { useState } from "react";
 
-interface GalleryItems {
+interface GalleryItem {
   id: string;
   url: string;
 }
 
+interface ThumbnailProps {
+  url: string;
+  isActive: boolean;
+  onSelect: () => void;
+  alt: string;
+}
+
+interface DetailProductImageProps {
+  image: string;
+  gallery?: GalleryItem[];
+  alt?: string;
+}
 export const DetailProductImage = ({
   image,
-  gallery,
-}: {
-  image: string;
-  gallery: GalleryItems[]; // 👈 pakai interface yang udah kamu buat
-}) => {
-  const [itemsImage, setItemsImage] = useState<string>();
+  gallery = [],
+  alt = "Product image",
+}: DetailProductImageProps) => {
+  const [activeImage, setActiveImage] = useState<string>(image);
 
   return (
-    <div className="w-full h-full  flex flex-col-reverse lg:flex-row gap-2">
-      {/* gallery image */}
-      <div className="lg:w-20 w-full flex flex-row justify-start items-center lg:flex-col gap-3">
-        <div
-          className=" w-20 h-20 p-2 border border-gray-200"
-          onClick={() => setItemsImage(image)}>
-          <img src={image} className="w-full h-full object-cover" alt="" />
-        </div>
-        {gallery
-          ? gallery.map((item, i) => (
-              <div
-                key={i}
-                className={`w-20 h-20 p-2 ${item.url === itemsImage ? "border border-orange-400" : "border border-gray-200"} cursor-pointer`} // ✅
-                onClick={() => setItemsImage(item.url)}>
-                <img
-                  src={item.url}
-                  className="w-full h-full object-cover"
-                  alt=""
-                />
-              </div>
-            ))
-          : null}
+    <div className="w-full flex flex-col-reverse lg:flex-row gap-2">
+      {/* Thumbnail list */}
+      <div className="lg:w-20 w-full flex flex-row justify-start items-center lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto">
+        <Thumbnail
+          url={image}
+          isActive={activeImage === image}
+          onSelect={() => setActiveImage(image)}
+          alt={alt}
+        />
+        {gallery.map((item) => (
+          <Thumbnail
+            key={item.id}
+            url={item.url}
+            isActive={activeImage === item.url}
+            onSelect={() => setActiveImage(item.url)}
+            alt={alt}
+          />
+        ))}
       </div>
-      {/* main image */}
-      <div className="flex-1 min-w-0 min-h-0">
-        {" "}
-        {/* <- tambahin ini */}
-        <div className="w-full h-full overflow-hidden">
-          {" "}
-          {/* <- kasih tinggi pasti + overflow-hidden */}
+
+      {/* Main image */}
+      <div className="flex-1 min-w-0">
+        <div className="w-full aspect-square overflow-hidden rounded-md">
           <img
-            src={itemsImage ? itemsImage : image}
-            className="w-full h-full object-cover"
-            alt=""
+            src={activeImage}
+            alt={alt}
+            className="w-full h-full object-cover transition-opacity duration-200"
           />
         </div>
       </div>
     </div>
   );
 };
+
+const Thumbnail = ({ url, isActive, onSelect, alt }: ThumbnailProps) => (
+  <button
+    type="button"
+    onClick={onSelect}
+    className={`shrink-0 w-20 h-20 p-2 border cursor-pointer transition-colors ${
+      isActive ? "border-orange-400" : "border-gray-200 hover:border-gray-300"
+    }`}
+    aria-pressed={isActive}>
+    <img src={url} alt={alt} className="w-full h-full object-cover" />
+  </button>
+);

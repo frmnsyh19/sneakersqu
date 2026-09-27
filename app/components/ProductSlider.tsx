@@ -41,14 +41,14 @@ export default function ProductSlider() {
   };
 
   return (
-    <div className="w-full px-4 sm:px-8 py-10">
+    <div className="w-full px-4 sm:px-8 py-2">
       {/* Filter */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-nowrap sm:flex-wrap gap-2 mb-6 overflow-x-auto sm:overflow-visible pb-1 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
         {filters.map((filter) => (
           <button
             key={filter.value}
             onClick={() => setActiveFilter(filter.value)}
-            className={`px-4 py-2 text-sm rounded-full border transition-colors ${
+            className={`shrink-0 px-4 py-2 text-sm rounded-full border transition-colors ${
               activeFilter === filter.value
                 ? "bg-black text-white border-black"
                 : "bg-white text-gray-700 border-gray-300 hover:border-black"

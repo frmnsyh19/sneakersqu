@@ -8,7 +8,7 @@ export default function LifestyleGallery() {
         </p>
       </div>
 
-      <div className="flex flex-row gap-2 sm:gap-4">
+      <div className="flex flex-col lg:flex-row gap-2 sm:gap-4">
         {/* Foto 1: Fokus kaki orang lari pakai sepatu */}
         <div className="relative flex-1 h-[160px] sm:h-[380px] rounded-lg overflow-hidden group">
           <img
