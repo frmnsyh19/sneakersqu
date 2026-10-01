@@ -41,7 +41,11 @@ export default function ProductSlider() {
   };
 
   return (
-    <div className="w-full px-4 sm:px-8 py-2">
+    <div
+      style={{
+        backgroundColor: "#F4F1EA",
+      }}
+      className="w-full px-4 sm:px-8 py-2">
       {/* Filter */}
       <div className="flex flex-nowrap sm:flex-wrap gap-2 mb-6 overflow-x-auto sm:overflow-visible pb-1 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
         {filters.map((filter) => (

@@ -13,7 +13,11 @@ export default function Home() {
     //   <RoomCard />
     // </div>
     <>
-      <div className="w-full flex flex-col gap-1">
+      <div
+        style={{
+          backgroundColor: "#F4F1EA",
+        }}
+        className="w-full flex flex-col gap-1">
         <NavbarSneckers />
         <HeaderBelanja />
         <ProductSlider />

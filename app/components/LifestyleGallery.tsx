@@ -1,6 +1,10 @@
 export default function LifestyleGallery() {
   return (
-    <div className="w-full px-4 sm:px-8 py-12">
+    <div
+      style={{
+        backgroundColor: "#F4F1EA",
+      }}
+      className="w-full px-4 sm:px-8 py-12">
       <div className="mb-6">
         <h2 className="text-2xl font-bold">Gaya Hidup Aktif</h2>
         <p className="text-sm text-gray-500 mt-1">
