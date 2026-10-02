@@ -6,9 +6,10 @@ export default function LifestyleGallery() {
       }}
       className="w-full px-4 sm:px-8 py-12">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold">Gaya Hidup Aktif</h2>
+        <h2 className="text-2xl font-bold">Shop the Look</h2>
         <p className="text-sm text-gray-500 mt-1">
-          Dari lari pagi sampai nongkrong santai
+          Discover the latest adidas sneakers, apparel, and accessories. From
+          performance-driven essentials to iconic everyday styles
         </p>
       </div>
 

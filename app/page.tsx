@@ -17,7 +17,7 @@ export default function Home() {
         style={{
           backgroundColor: "#F4F1EA",
         }}
-        className="w-full flex flex-col gap-1">
+        className="w-full flex flex-col gap-2">
         <NavbarSneckers />
         <HeaderBelanja />
         <ProductSlider />

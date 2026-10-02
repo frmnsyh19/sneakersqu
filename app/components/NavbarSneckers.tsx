@@ -1,14 +1,12 @@
 "use client";
 
-import { useGetCart } from "@/services/useCart";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Cart } from "./Cart";
 import { SearchNavbar } from "./SearchNavbar";
-import { addParams } from "@/store/SearchSlice";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Logo } from "./Navbar/Logo";
+import Link from "next/link";
 
 export const NavbarSneckers = () => {
   const [category, setCategory] = useState<string | null>();
@@ -20,6 +18,8 @@ export const NavbarSneckers = () => {
       router.push(`/discover/${category}`);
     }
   }, [category, router]);
+
+  const session = useSession();
 
   return (
     <>
@@ -83,6 +83,23 @@ export const NavbarSneckers = () => {
                         Sneckers
                       </a>
                     </li>
+                    {session ? (
+                      <li className="pt-2 md:pt-0">
+                        <button
+                          onClick={() => signOut()}
+                          className="md:hidden py-2.5 px-4 bg-orange-400 text-white hover:bg-orange-500 rounded-sm">
+                          Sign Out
+                        </button>
+                      </li>
+                    ) : (
+                      <li className="pt-2 md:pt-0">
+                        <Link
+                          href="/signin"
+                          className="py-2.5 px-4 bg-orange-400 text-white hover:bg-orange-500 rounded-sm">
+                          Sign In
+                        </Link>
+                      </li>
+                    )}
                     {/* pesanan saya jika sudah login */}
                   </ul>
                 </div>
