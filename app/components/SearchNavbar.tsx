@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchProducts } from "@/services/useSearchProduct";
 
-export const SearchNavbar = () => {
+export const SearchNavbar = ({
+  setActiveSearch,
+}: {
+  setActiveSearch: (active: boolean) => void;
+}) => {
   const router = useRouter();
   const [isSearch, setIsSearch] = useState(false);
   const [query, setQuery] = useState("");
@@ -27,6 +31,7 @@ export const SearchNavbar = () => {
         !wrapperRef.current.contains(e.target as Node)
       ) {
         setIsSearch(false);
+        setActiveSearch(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -44,6 +49,7 @@ export const SearchNavbar = () => {
 
   function handleSelectProduct(id: string) {
     setIsSearch(false);
+    setActiveSearch(false);
     setQuery("");
     router.push(`/belanja/detail/${id}`);
   }
@@ -55,7 +61,10 @@ export const SearchNavbar = () => {
       {/* Icon search */}
       <button
         aria-label="Search"
-        onClick={() => setIsSearch(true)}
+        onClick={() => {
+          setIsSearch(true);
+          setActiveSearch(true);
+        }}
         className={`p-2 hover:opacity-70 transition-opacity duration-200 ${
           isSearch ? "opacity-0 w-0 pointer-events-none" : "opacity-100"
         }`}>
@@ -78,7 +87,7 @@ export const SearchNavbar = () => {
       <label
         className={`input flex items-center gap-2 overflow-hidden transition-all duration-300 ease-in-out ${
           isSearch
-            ? "lg:w-64 w-40 opacity-100 px-3"
+            ? "lg:w-64 w-36 border border-red-500 opacity-100 px-3"
             : "w-0 opacity-0 px-0 border-none"
         }`}>
         <svg

@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export const NavbarSneckers = () => {
   const [category, setCategory] = useState<string | null>();
-
+  const [activeSearch, setActiveSearch] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -105,8 +105,10 @@ export const NavbarSneckers = () => {
                 </div>
                 <div className=" flex justify-end  flex-row gap-1">
                   <div className="flex flex-row gap-1">
-                    <SearchNavbar />
-                    <Cart />
+                    <SearchNavbar setActiveSearch={setActiveSearch} />
+                    <div className={activeSearch ? "hidden md:block" : "block"}>
+                      <Cart />
+                    </div>
                   </div>
                 </div>
               </div>
