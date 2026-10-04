@@ -5,6 +5,8 @@ import { NavbarSneckers } from "./components/NavbarSneckers";
 import { HeaderBelanja } from "./components/HeaderBelanja";
 import ProductSlider from "./components/ProductSlider";
 import LifestyleGallery from "./components/LifestyleGallery";
+import { LeaderBox } from "./components/header/LeaderBox";
+import { Feedback } from "./components/header/Feedback";
 
 export default function Home() {
   return (
@@ -22,6 +24,8 @@ export default function Home() {
         <HeaderBelanja />
         <ProductSlider />
         <LifestyleGallery />
+        <LeaderBox />
+        <Feedback />
       </div>
     </>
   );
