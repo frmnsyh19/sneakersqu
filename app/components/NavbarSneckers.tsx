@@ -19,7 +19,9 @@ export const NavbarSneckers = () => {
     }
   }, [category, router]);
 
-  const session = useSession();
+  const { data: session } = useSession();
+
+  console.log(session, "session");
 
   return (
     <>
@@ -83,31 +85,63 @@ export const NavbarSneckers = () => {
                         Sneckers
                       </a>
                     </li>
-                    {session ? (
-                      <li className="pt-2 md:pt-0">
-                        <button
-                          onClick={() => signOut()}
-                          className="md:hidden py-2.5 px-4 bg-orange-400 text-white hover:bg-orange-500 rounded-sm">
-                          Sign Out
-                        </button>
-                      </li>
-                    ) : (
-                      <li className="pt-2 md:pt-0">
-                        <Link
-                          href="/signin"
-                          className="py-2.5 px-4 bg-orange-400 text-white hover:bg-orange-500 rounded-sm">
-                          Sign In
-                        </Link>
-                      </li>
-                    )}
+
                     {/* pesanan saya jika sudah login */}
                   </ul>
                 </div>
                 <div className=" flex justify-end  flex-row gap-1">
-                  <div className="flex flex-row gap-1">
+                  <div className="flex flex-row">
                     <SearchNavbar setActiveSearch={setActiveSearch} />
                     <div className={activeSearch ? "hidden md:block" : "block"}>
                       <Cart />
+                    </div>
+                    <div className={activeSearch ? "hidden md:block" : "block"}>
+                      {session ? (
+                        <>
+                          {/* <button
+                            style={{
+                              backgroundColor: "#141414",
+                            }}
+                            onClick={() => signOut()}
+                            className="btn btn-sm rounded-2xl">
+                            Sign Out
+                          </button> */}
+                          <div className="dropdown dropdown-end">
+                            <div
+                              tabIndex={0}
+                              role="button"
+                              className="btn btn-ghost btn-circle avatar">
+                              <div className="w-10 rounded-full">
+                                <img
+                                  alt="Tailwind CSS Navbar component"
+                                  src={`${session.user.image}`}
+                                />
+                              </div>
+                            </div>
+                            <ul
+                              tabIndex={-1}
+                              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                              <li>
+                                <a>Settings</a>
+                              </li>
+                              <li>
+                                <a onClick={() => signOut()}>Logout</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <Link
+                            style={{
+                              backgroundColor: "#FF5A3C",
+                            }}
+                            href="/signin"
+                            className="btn btn-sm rounded-2xl text-white ">
+                            Sign In
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
