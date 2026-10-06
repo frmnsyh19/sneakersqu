@@ -97,6 +97,7 @@ export default function ProductSlider() {
             className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pb-2">
             {filteredProducts.map((product) => (
               <div
+                onClick={() => handleDetailProduct(product.id)}
                 key={product.id}
                 className="snap-start bg-white shrink-0 w-[220px] sm:w-[240px] border border-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="w-full h-60 bg-gray-50">
@@ -113,11 +114,15 @@ export default function ProductSlider() {
                   <p className="text-sm text-gray-500 mt-1">
                     Rp {product.price.toLocaleString("id-ID")}
                   </p>
-                  <button
+                  <p className="text-sm capitalize mt-2 text-gray-500 mt-1">
+                    {product.kategori}
+                  </p>
+
+                  {/* <button
                     onClick={() => handleDetailProduct(product.id)}
                     className="w-full mt-3 bg-black text-white text-xs py-2 rounded-md hover:bg-gray-800">
                     Tambah ke Keranjang
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}

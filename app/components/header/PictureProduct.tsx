@@ -6,7 +6,7 @@ export const PictureProduct = () => {
       <img
         alt="Tailwind CSS hero component"
         src="/hero-sneaker.png"
-        className="max-w-sm rounded-lg shadow-2xl"
+        className="w-full lg:max-w-sm h-auto rounded-lg shadow-2xl"
       />
     </>
   );
